@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://www.yunedit.com/update/neice/iosDown?id=55712 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title> APP下载</title>
+
+    <script>   
+    
+    
+    </script>
+    <!--  <link rel="stylesheet" type="text/css" href="css/comon.css"/>-->
+<style type="text/css">
+html,body{height: 100%; width:100%;box-sizing:border-box;padding: 0px;margin: 0px;}
+.btn_android{height: 100vh; width: 100%; background:#ffa200; position: fixed;z-index: 2; left: 0px;top: 0px;box-sizing:border-box;}
+.btn_app{width:80%; height:47px; position: absolute; bottom: 2%; left: 10%; overflow:hidden;}
+.btn_app input{display:block;width: 46%; height: 47px;}
+#btn_android{background: url(../images/download/btn_android.png?v=1.0) no-repeat; background-size: 100%;float:left;}
+#btn_ios{background: url(../images/download/btn_ios.png?v=1.0) no-repeat;background-size: 100%;float:right;}
+.tips{width: 100%; position: fixed;top: 0px; bottom: 0; left: 0; z-index: 99; background: url(../images/download/opa1.png);box-sizing:border-box;}
+.tips_in{overflow:hidden;}
+.tips_in i{display:block; width:84px; height:132px; float:right; background: url(../images/download/arrow_indicate.png) no-repeat; margin:2% 2% 0 0;}
+.tips_in .ScanLife{width:33%; margin:15px auto 0;}
+.tips_in .ScanLife img{width:100%;}
+.tips_in p{height: 30px; line-height: 30px; color: #fff; font-size: 1.4em; text-align:center; width:80%; margin:0 auto;}
+
+
+        .btn {
+            margin: 0px 5px; padding: 16px 22px; border-radius: 4px; transition:background-color 0.3s; text-align: center; color: rgb(255, 255, 255); line-height: 1; font-size: 30px !important; font-weight: normal !important; text-decoration: none !important; vertical-align: middle; display: inline-block; -ms-user-select: none; background-image: none; -webkit-transition: background-color .3s; -moz-transition: background-color .3s; -webkit-user-select: none; -moz-user-select: none; user-select: none;
+        }
+        .btn-orange {
+            background-color: rgb(255, 128, 0);
+        }
+        .btn-orange:hover {
+            background-color: rgb(255, 156, 43);
+        }
+        .btn-orange:active {
+            background-color: rgb(223, 102, 0);
+        }
+        .btn-blue {
+            background-color: rgb(67, 144, 231);
+        }
+        .btn-blue:hover {
+            background-color: rgb(100, 170, 255);
+        }
+        .btn-blue:active {
+            background-color: rgb(23, 118, 202);
+        }
+        
+        .h11{color: #fff;font-size: 28px;padding-bottom: 8px;}
+        
+        .h12{color: #fff;font-size: 22px;padding-bottom: 15px;}
+
+        .h13{color: #fff;font-size: 14px;padding-top: 15px;}
+        
+        
+        .oval {
+            width: 100%; 
+            height: 16vh; 
+            background-color: #ff9000;
+            -moz-border-radius: 50% / 50%; 
+            -webkit-border-radius: 50% / 50%; 
+            border-radius: 50% / 50%;
+            
+            position: fixed;
+            z-index: 20;
+            left: 0px;
+            top:-8vh
+        }
+        
+        .oval2 {
+            width: 100%; 
+            height: 12vh; 
+            background-color: #ff9000;
+            -moz-border-radius: 50% / 50%; 
+            -webkit-border-radius: 50% / 50%; 
+            border-radius: 50% / 50%;
+            
+            position: fixed;
+            z-index: 20;
+            left: 0px;
+            top:94vh
+        }
+</style>
+</head>
+<body>
+    
+    <div id="tips1" class="tips" style="display: none;">
+        <div class="tips_in">
+            <i></i>
+            <p style="margin-top:140px;">点击右上角，
+            </p><p>选择“在浏览器中打开”，</p>
+            <p>即可下载安装。</p>
+        </div>
+    </div>
+    
+
+    <div class="oval"></div>
+    <div class="oval2"></div>
+    
+    <div class="btn_android" style="padding-top: 25vh;text-align: center;">
+    
+        <img alt="" src="./apple-touch-icon.png" style="width: 70px;margin-bottom:12px;border-radius:5px;">
+        <div class="h11">澳思QC</div>
+        <div class="h12">版本：1.0.0</div>
+              <a id="download" class="btn btn-orange " href="itms-services://?action=download-manifest&amp;url=https://www.bluestarsolutions.net/manifest.plist">立即下载</a><br>
+              <div class="h13">(点击下载安装后返回桌面查看进度)</div>
+        
+    </div>
+    
+    
+            
+    
+    <script type="text/javascript">
+    // document.getElementById('download').href = 'itms-services://?action=download-manifest&amp;url=' + window.location.href + 'manifest.plist';
+    var wechatInfo = navigator.userAgent.match(/MicroMessenger\/([\d\.]+)/i) ;
+    if(wechatInfo)
+    {
+      $("#tips1").show();
+    }
+    </script>
+
+
+</body></html>
