@@ -1,6 +1,7 @@
 {
 	"version": "1.0.4",
-	"now_url": "http://192.168.11.171:9082/APP_Manager/qcapp.ipa",
+	"ios_url": "https://13432977700.github.io/ausqc",
+	"now_url": "https://13432977700.github.io/ausqc/qcapp.ipa",
 	"silent": 0,
 	"silent_desc": "是否是静默更新",
 	"force": 0,
@@ -10,6 +11,7 @@
 	"note": "1.优化登录业务；  \n2.增加ios更新机制；\n3.优化样式"
 
 }
+
 
 
 
