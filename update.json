@@ -1,6 +1,6 @@
 {
-	"version": "1.1.9",
-	"now_url": "http://192.168.165.71:9082/update/119.apk",
+	"version": "1.0.4",
+	"now_url": "http://192.168.11.171:9082/APP_Manager/qcapp.ipa",
 	"silent": 0,
 	"silent_desc": "是否是静默更新",
 	"force": 1,
@@ -10,4 +10,5 @@
 	"note": "1.APP版本获取转回内部接口  \n 2.优化查片抽查页面"
 
 }
+
 
