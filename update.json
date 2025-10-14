@@ -3,13 +3,14 @@
 	"now_url": "http://192.168.11.171:9082/APP_Manager/qcapp.ipa",
 	"silent": 0,
 	"silent_desc": "是否是静默更新",
-	"force": 1,
+	"force": 0,
 	"force_desc": "是否是强制更新",
 	"net_check": 1,
 	"net_check_desc": "非WIfi是否提示",
 	"note": "1.优化登录业务；  \n2.增加ios更新机制；\n3.优化样式"
 
 }
+
 
 
 
