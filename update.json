@@ -7,8 +7,9 @@
 	"force_desc": "是否是强制更新",
 	"net_check": 1,
 	"net_check_desc": "非WIfi是否提示",
-	"note": "1.APP版本获取转回内部接口  \n 2.优化查片抽查页面"
+	"note": "1.优化登录业务；  \n2.增加ios更新机制；\n3.优化样式"
 
 }
+
 
 
