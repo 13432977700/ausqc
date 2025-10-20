@@ -1,5 +1,5 @@
 {
-	"version": "1.0.5",
+	"version": "1.0.4",
 	"ios_url_desc": "ios平台的安装页面",
 	"ios_url": "http://192.168.165.71:9082/APP_Manager/ausqc",
 	"now_url_desc": "安卓平台的下载地址",
@@ -13,6 +13,7 @@
 	"note": "1.优化登录业务；  \n2.增加ios更新机制；\n3.优化样式"
 
 }
+
 
 
 
