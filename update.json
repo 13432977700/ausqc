@@ -1,5 +1,5 @@
 {
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"ios_url_desc": "ios平台的安装页面",
 	"ios_url": "https://13432977700.github.io/ausqc",
 	"now_url_desc": "安卓平台的下载地址",
@@ -13,6 +13,7 @@
 	"note": "1.补充登陆环境显示，只有测试库才会显示UAT；  \n2.优化水次选择；"
 
 }
+
 
 
 
