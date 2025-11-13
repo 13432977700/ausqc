@@ -10,9 +10,10 @@
 	"force_desc": "是否是强制更新",
 	"net_check": 1,
 	"net_check_desc": "非WIfi是否提示",
-	"note": "1.补充登陆环境显示，只有测试库才会显示UAT；  \n2.优化水次选择；"
+	"note": "1.修复bug；  \n2.优化疵点原因选择；"
 
 }
+
 
 
 
