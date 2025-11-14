@@ -104,7 +104,14 @@ html,body{height: 100%; width:100%;box-sizing:border-box;padding: 0px;margin: 0p
     
         <img alt="" src="./apple-touch-icon.png" style="width: 70px;margin-bottom:12px;border-radius:5px;">
         <div class="h11">澳思QC</div>
-        <div class="h12">版本：1.1.0</div>
+        <div class="h12">
+            <!-- 版本：1.1.0 -->
+            <span id="version">- 加载中 -</span>
+        </div>
+        <div class="h12">
+            <span class="label">更新说明：</span>
+            <span id="note">- 加载中 -</span>
+        </div>
               <a id="download" class="btn btn-orange " href="itms-services://?action=download-manifest&amp;url=https://13432977700.github.io/ausqc/manifest.plist">立即下载</a><br>
               <div class="h13">(点击下载安装后返回桌面查看进度)</div>
         
@@ -120,6 +127,40 @@ html,body{height: 100%; width:100%;box-sizing:border-box;padding: 0px;margin: 0p
     {
       $("#tips1").show();
     }
+        // 目标JSON文件URL
+        const jsonUrl = 'https://13432977700.github.io/ausqc/update.json';
+        
+        // 获取DOM元素
+        const versionElement = document.getElementById('version');
+        const noteElement = document.getElementById('note');
+        const errorElement = document.getElementById('error');
+
+        // 读取并显示JSON数据
+        function fetchAndDisplayData() {
+            fetch(jsonUrl)
+                .then(response => {
+                    // 检查响应是否成功
+                    if (!response.ok) {
+                        throw new Error(`HTTP错误：状态码 ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 显示获取到的数据
+                    versionElement.textContent = data.version || '未找到版本信息';
+                    noteElement.textContent = data.note || '未找到更新说明';
+                })
+                .catch(error => {
+                    // 显示错误信息
+                    errorElement.textContent = `加载失败：${error.message}`;
+                    errorElement.style.display = 'block';
+                    versionElement.textContent = '加载失败';
+                    noteElement.textContent = '加载失败';
+                });
+        }
+
+        // 页面加载完成后执行
+        window.onload = fetchAndDisplayData;
     </script>
 
 
