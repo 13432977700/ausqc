@@ -1,5 +1,5 @@
 {
-	"version": "1.1.8",
+	"version": "1.1.9",
 	"ios_url_desc": "ios平台的安装页面",
 	"ios_url": "https://13432977700.github.io/ausqc",
 	"now_url_desc": "安卓平台的下载地址",
@@ -10,9 +10,9 @@
 	"force_desc": "是否是强制更新",
 	"net_check": 1,
 	"net_check_desc": "非WIfi是否提示",
-	"note": "1.修复图片不保存bug；  \n2.优化交互；"
-
+	"note": "1.修复已知bug；  \n2.优化交互；"
 }
+
 
 
 
