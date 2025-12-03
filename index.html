@@ -128,8 +128,9 @@ html,body{height: 100%; width:100%;box-sizing:border-box;padding: 0px;margin: 0p
     {
       $("#tips1").show();
     }
+		let datetime = new Date().getTime()
         // 目标JSON文件URL
-        const jsonUrl = 'https://13432977700.github.io/ausqc/update.json';
+        const jsonUrl = 'https://13432977700.github.io/ausqc/update.json?' + datetime;
         
         // 获取DOM元素
         const versionElement = document.getElementById('version');
