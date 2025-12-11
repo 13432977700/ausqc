@@ -1,5 +1,5 @@
 {
-	"version": "1.2.0",
+	"version": "1.2.2",
 	"ios_url_desc": "ios平台的安装页面",
 	"ios_url": "https://13432977700.github.io/ausqc",
 	"now_url_desc": "安卓平台的下载地址",
@@ -12,6 +12,7 @@
 	"net_check_desc": "非WIfi是否提示",
 	"note": "1.修复已知bug；  \n2.优化交互；"
 }
+
 
 
 
