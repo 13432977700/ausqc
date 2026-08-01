@@ -312,7 +312,7 @@
 
         function buildInstallUrl(plistFile) {
             var plistUrl = new URL('history_plist/' + plistFile, window.location.href).href;
-            return 'itms-services://?action=download-manifest&url=' + encodeURIComponent(plistUrl);
+            return 'itms-services://?action=download-manifest&url=' + (plistUrl);
         }
 
         function escapeHtml(str) {
