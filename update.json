@@ -12,7 +12,7 @@
 	"force_desc": "是否是强制更新",
 	"net_check": 1,
 	"net_check_desc": "非WIfi是否提示",
-	"note": "1.修复已知bug；  \n2.优化交互；"
+	"note": "1.修复图片上传返回详情页时数据错乱bug；  \n2.优化交互；"
 }
 
 
