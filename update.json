@@ -8,7 +8,7 @@
 	"now_url": "https://13432977700.github.io/ausqc/qcapp.ipa",
 	"silent": 0,
 	"silent_desc": "是否是静默更新",
-	"force": 0,
+	"force": 1,
 	"force_desc": "是否是强制更新",
 	"net_check": 1,
 	"net_check_desc": "非WIfi是否提示",
