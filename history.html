@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>历史版本</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            background: #ffa200;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        }
+
+        .page {
+            min-height: 100%;
+            padding: 24px 20px 40px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .icon {
+            width: 70px;
+            margin: 20px 0 12px;
+            border-radius: 5px;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 28px;
+            padding-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #fff;
+            font-size: 16px;
+            padding-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #fff;
+            font-size: 14px;
+            text-decoration: none;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .back-link:active {
+            opacity: 0.7;
+        }
+
+        .list {
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            max-width: 420px;
+            text-align: left;
+        }
+
+        .list li {
+            margin-bottom: 12px;
+        }
+
+        .list a {
+            display: block;
+            padding: 16px 18px;
+            border-radius: 4px;
+            background-color: rgb(255, 128, 0);
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .list a:hover {
+            background-color: rgb(255, 156, 43);
+        }
+
+        .list a:active {
+            background-color: rgb(223, 102, 0);
+        }
+
+        .list a .name {
+            font-weight: 600;
+        }
+
+        .list a .hint {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        .empty, .error, .loading {
+            color: #fff;
+            font-size: 16px;
+            padding: 20px 10px;
+        }
+
+        .error {
+            color: #fff0e0;
+        }
+
+        .footer-hint {
+            color: #fff;
+            font-size: 13px;
+            padding-top: 18px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a class="back-link" href="index.html">← 返回最新版下载</a>
+        <img class="icon" alt="" src="./apple-touch-icon.png">
+        <div class="title">澳思QC</div>
+        <div class="subtitle">历史版本</div>
+        <div id="status" class="loading">加载中…</div>
+        <ul id="list" class="list" style="display: none;"></ul>
+        <div class="footer-hint">(点击版本后返回桌面查看安装进度)</div>
+    </div>
+
+    <script type="text/javascript">
+        function stripExt(filename) {
+            return filename.replace(/\.plist$/i, '');
+        }
+
+        function compareVersionName(a, b) {
+            var pa = stripExt(a).split(/[^\d]+/).map(function (n) { return parseInt(n, 10) || 0; });
+            var pb = stripExt(b).split(/[^\d]+/).map(function (n) { return parseInt(n, 10) || 0; });
+            var len = Math.max(pa.length, pb.length);
+            for (var i = 0; i < len; i++) {
+                var diff = (pb[i] || 0) - (pa[i] || 0);
+                if (diff !== 0) return diff;
+            }
+            return stripExt(b).localeCompare(stripExt(a), 'zh');
+        }
+
+        function buildInstallUrl(plistFile) {
+            var plistUrl = new URL('history_plist/' + plistFile, window.location.href).href;
+            return 'itms-services://?action=download-manifest&url=' + encodeURIComponent(plistUrl);
+        }
+
+        function renderList(files) {
+            var status = document.getElementById('status');
+            var list = document.getElementById('list');
+            var plists = (files || []).filter(function (name) {
+                return /\.plist$/i.test(name);
+            }).sort(compareVersionName);
+
+            if (!plists.length) {
+                status.className = 'empty';
+                status.textContent = '暂无历史版本';
+                list.style.display = 'none';
+                return;
+            }
+
+            list.innerHTML = '';
+            plists.forEach(function (file) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = buildInstallUrl(file);
+                a.innerHTML = '<span class="name">' + stripExt(file) + '</span>' +
+                    '<span class="hint">点击安装此版本</span>';
+                li.appendChild(a);
+                list.appendChild(li);
+            });
+
+            status.style.display = 'none';
+            list.style.display = 'block';
+        }
+
+        function showError(message) {
+            var status = document.getElementById('status');
+            status.className = 'error';
+            status.textContent = message;
+            document.getElementById('list').style.display = 'none';
+        }
+
+        function fetchList(url) {
+            return fetch(url + (url.indexOf('?') >= 0 ? '&' : '?') + '_=' + Date.now())
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP ' + response.status);
+                    }
+                    return response.json();
+                });
+        }
+
+        function loadHistory() {
+            fetchList('history_list.json')
+                .then(renderList)
+                .catch(function (err) {
+                    showError('加载失败：' + err.message);
+                });
+        }
+
+        var wechatInfo = navigator.userAgent.match(/MicroMessenger\/([\d\.]+)/i);
+        if (wechatInfo) {
+            alert('请点击右上角，选择“在浏览器中打开”后再安装。');
+        }
+
+        window.onload = loadHistory;
+    </script>
+</body>
+</html>
