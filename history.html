@@ -217,25 +217,51 @@
 
         .list a .meta {
             min-width: 0;
+            flex: 1;
+        }
+
+        .list a .head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 2px;
         }
 
         .list a .name {
-            display: block;
             font-size: 18px;
             font-weight: 650;
             letter-spacing: 0.02em;
             word-break: break-all;
         }
 
+        .list a .date {
+            flex-shrink: 0;
+            font-size: 12px;
+            opacity: 0.82;
+            white-space: nowrap;
+        }
+
+        .list a .note {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            line-height: 1.45;
+            opacity: 0.92;
+            white-space: pre-line;
+            word-break: break-word;
+        }
+
         .list a .hint {
             display: block;
-            margin-top: 5px;
+            margin-top: 6px;
             font-size: 12px;
-            opacity: 0.85;
+            opacity: 0.75;
         }
 
         .list a .badge {
             flex-shrink: 0;
+            align-self: center;
             padding: 6px 10px;
             border-radius: 999px;
             background: rgba(255, 255, 255, 0.2);
@@ -296,7 +322,23 @@
 
     <script type="text/javascript">
         function stripExt(filename) {
-            return filename.replace(/\.plist$/i, '');
+            return String(filename || '').replace(/\.plist$/i, '');
+        }
+
+        function normalizeItem(item) {
+            if (typeof item === 'string') {
+                return { file: item, note: '', publishedAt: '' };
+            }
+            if (!item || typeof item !== 'object') {
+                return null;
+            }
+            var file = item.file || item.plist || item.name || '';
+            if (!file) return null;
+            return {
+                file: file,
+                note: item.note || item.description || item.desc || '',
+                publishedAt: item.publishedAt || item.publishTime || item.date || ''
+            };
         }
 
         function compareVersionName(a, b) {
@@ -312,7 +354,7 @@
 
         function buildInstallUrl(plistFile) {
             var plistUrl = new URL('history_plist/' + plistFile, window.location.href).href;
-            return 'itms-services://?action=download-manifest&url=' + (plistUrl);
+            return 'itms-services://?action=download-manifest&url=' + encodeURIComponent(plistUrl);
         }
 
         function escapeHtml(str) {
@@ -323,14 +365,25 @@
                 .replace(/"/g, '&quot;');
         }
 
-        function renderList(files) {
+        function formatPublishedAt(value) {
+            if (!value) return '';
+            var text = String(value).trim();
+            if (/^\d{4}-\d{2}-\d{2}/.test(text)) {
+                return text.replace('T', ' ').slice(0, 16);
+            }
+            return text;
+        }
+
+        function renderList(items) {
             var status = document.getElementById('status');
             var list = document.getElementById('list');
-            var plists = (files || []).filter(function (name) {
-                return /\.plist$/i.test(name);
-            }).sort(compareVersionName);
+            var versions = (items || []).map(normalizeItem).filter(function (item) {
+                return item && /\.plist$/i.test(item.file);
+            }).sort(function (a, b) {
+                return compareVersionName(a.file, b.file);
+            });
 
-            if (!plists.length) {
+            if (!versions.length) {
                 status.className = 'status empty';
                 status.textContent = '暂无历史版本';
                 status.style.display = 'block';
@@ -339,13 +392,25 @@
             }
 
             list.innerHTML = '';
-            plists.forEach(function (file) {
+            versions.forEach(function (item) {
                 var li = document.createElement('li');
                 var a = document.createElement('a');
-                a.href = buildInstallUrl(file);
+                var dateText = formatPublishedAt(item.publishedAt);
+                var noteHtml = item.note
+                    ? '<span class="note">' + escapeHtml(item.note) + '</span>'
+                    : '';
+                var dateHtml = dateText
+                    ? '<span class="date">' + escapeHtml(dateText) + '</span>'
+                    : '';
+
+                a.href = buildInstallUrl(item.file);
                 a.innerHTML =
                     '<span class="meta">' +
-                        '<span class="name">' + escapeHtml(stripExt(file)) + '</span>' +
+                        '<span class="head">' +
+                            '<span class="name">' + escapeHtml(stripExt(item.file)) + '</span>' +
+                            dateHtml +
+                        '</span>' +
+                        noteHtml +
                         '<span class="hint">点击安装此版本</span>' +
                     '</span>' +
                     '<span class="badge">安装</span>';
