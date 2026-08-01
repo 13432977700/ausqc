@@ -1,9 +1,9 @@
 {
 	"version": "1.1.9",
 	"ios_url_desc": "ios平台的安装页面",
-	"ios_url": "https://13432977700.github.io/ausqc",
+	"ios_url": "https://13432977700.github.io/ausqc/recovery",
 	"now_url_desc": "安卓平台的下载地址",
-	"now_url": "https://13432977700.github.io/ausqc/qcapp.ipa",
+	"now_url": "https://13432977700.github.io/ausqc/recovery/qcapp.ipa",
 	"silent": 0,
 	"silent_desc": "是否是静默更新",
 	"force": 0,
